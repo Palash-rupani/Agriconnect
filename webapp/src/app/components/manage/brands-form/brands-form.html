@@ -1,0 +1,46 @@
+<div class="brand-form">
+  <form (ngSubmit)="add()">
+    <div class="form-header">
+      <ng-container *ngIf="isEdit; else addBrand">
+        <h2 class="form-title">
+          <span class="title-icon">✏️</span>
+          <span class="title-text">Edit Brand</span>
+        </h2>
+      </ng-container>
+      <ng-template #addBrand>
+        <h2 class="form-title">
+          <span class="title-icon">➕</span>
+          <span class="title-text">Add New Brand</span>
+        </h2>
+      </ng-template>
+    </div>
+
+    <div class="form-content">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Brand Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="name"
+          name="brandName"
+          placeholder="e.g., Indian  Himalayan"
+          required
+          autocomplete="off"
+        />
+        <mat-icon matSuffix>branding_watermark</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button
+        class="btn-submit"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!name"
+      >
+        <mat-icon>{{ isEdit ? 'edit' : 'add' }}</mat-icon>
+        {{ isEdit ? 'Update Brand' : 'Save Brand' }}
+      </button>
+    </div>
+  </form>
+</div>

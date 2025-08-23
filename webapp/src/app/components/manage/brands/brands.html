@@ -1,0 +1,56 @@
+<div class="categories-container">
+  <div class="page-header">
+    <div class="header-left">
+      <h1 class="section-title">📂 Manage Brands</h1>
+      <p class="section-intro">
+        Add, edit, or remove crop and product Brands for the marketplace.
+      </p>
+    </div>
+    <div class="header-right">
+      <button mat-flat-button color="primary" class="btn-add" routerLink="/admin/brands/add">
+        ➕ Add A New Brand
+      </button>
+    </div>
+  </div>
+
+  <div class="card mat-card-container">
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Filter by Name</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="e.g., Nike">
+    </mat-form-field>
+
+    <div class="table-responsive" *ngIf="dataSource.data?.length; else emptyState">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 categories-table">
+
+        <ng-container matColumnDef="_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"> {{ element._id }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="action-column-header"> Action </th>
+          <td mat-cell *matCellDef="let element" class="action-cell">
+            <button mat-button class="btn-edit" [routerLink]="['/admin/brands/edit', element._id]">
+              <span>Edit</span>
+            </button>
+            <button mat-button class="btn-delete" (click)="deleteBrand(element._id)">
+              <span>Delete</span>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <ng-template #emptyState>
+      <p style="padding:1rem">No brands found.</p>
+    </ng-template>
+  </div>
+</div>

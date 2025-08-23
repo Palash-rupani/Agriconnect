@@ -1,0 +1,56 @@
+<div class="category-form-container">
+  <form (ngSubmit)="add()" class="category-form">
+    <div class="form-header">
+      @if(isedid){
+        <h2 class="form-title edit-title">
+          <span class="title-icon">✏️</span>
+          <span class="title-text">Edit Category</span>
+        </h2>
+      }@else{
+        <h2 class="form-title add-title">
+          <span class="title-icon">➕</span>
+          <span class="title-text">Add New Category</span>
+        </h2>
+      }
+    </div>
+
+    <div class="form-content">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Category Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="name"
+          name="categoryName"
+          placeholder="e.g., Vegetables, Fruits, Grains"
+          required
+          autocomplete="off"
+        />
+        <mat-icon matSuffix>category</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      @if(isedid){
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!name"
+        >
+          <mat-icon>edit</mat-icon>
+          Update Category
+        </button>
+      }@else{
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!name"
+        >
+          <mat-icon>add</mat-icon>
+          Save Category
+        </button>
+      }
+    </div>
+  </form>
+</div>
