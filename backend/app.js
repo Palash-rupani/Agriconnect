@@ -5,6 +5,7 @@ const port = 3000
 const cors = require('cors')
 const categoryRoutes = require('./routes/category')
 const brandRoutes = require('./routes/brand')
+const productRoutes = require('./routes/product')
 
 app.use(cors())
 app.use(express.json())
@@ -12,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('server running')
 })
+
+app.use("/product",productRoutes)
 app.use("/category",categoryRoutes)
 app.use("/brands",brandRoutes)
 
