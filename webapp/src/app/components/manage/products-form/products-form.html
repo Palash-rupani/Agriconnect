@@ -1,1 +1,52 @@
-<p>products-form works!</p>
+<div class="form-container">
+  <h2 class="form-title">Add Product</h2>
+
+  <form class="form-grid">
+
+    <!-- Product Name -->
+    <div class="form-field">
+      <label>Product Name</label>
+      <input type="text" placeholder="Enter product name" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-field full-width">
+      <label>Description</label>
+      <textarea rows="3" placeholder="Enter product description"></textarea>
+    </div>
+
+    <!-- Price -->
+    <div class="form-field">
+      <label>Price</label>
+      <input type="number" placeholder="Enter price" />
+    </div>
+
+    <!-- Discount -->
+    <div class="form-field">
+      <label>Discount (%)</label>
+      <input type="number" placeholder="Enter discount" />
+    </div>
+
+    <!-- Image (string for now) -->
+    <div class="form-field full-width">
+      <label>Image URL / String</label>
+      <input type="text" placeholder="Enter image URL" />
+    </div>
+
+    <!-- Category -->
+    <div class="form-field full-width">
+      <label>Category</label>
+      <select>
+        <option value="" disabled selected>Select category</option>
+        <option>Fruits</option>
+        <option>Vegetables</option>
+        <option>Grains</option>
+      </select>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-actions">
+      <button type="button">Save Product</button>
+    </div>
+  </form>
+</div>

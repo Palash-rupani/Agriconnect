@@ -1,14 +1,14 @@
-<div class="categories-container">
+<div class="products-container">
   <div class="page-header">
     <div class="header-left">
-      <h1 class="section-title">📂 Manage Products</h1>
+      <h1 class="section-title">📦 Manage Products</h1>
       <p class="section-intro">
-        Add, edit, or remove crop and product Brands for the marketplace.
+        Add, edit, or remove products for the marketplace.
       </p>
     </div>
     <div class="header-right">
-      <button mat-flat-button color="primary" class="btn-add" routerLink="/admin/products/add">
-        ➕ Add  New product
+      <button mat-flat-button class="btn-add" routerLink="/admin/products/add">
+        ➕ Add New Product
       </button>
     </div>
   </div>
@@ -16,30 +16,51 @@
   <div class="card mat-card-container">
     <mat-form-field appearance="fill" class="filter-field">
       <mat-label>Filter by Name</mat-label>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="e.g., Nike">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="e.g., Tomato">
     </mat-form-field>
 
     <div class="table-responsive" *ngIf="dataSource.data?.length; else emptyState">
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 categories-table">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 products-table">
 
+        <!-- ID -->
         <ng-container matColumnDef="_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
           <td mat-cell *matCellDef="let element"> {{ element._id }} </td>
         </ng-container>
 
+        <!-- Name -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
           <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
         </ng-container>
 
+        <!-- Description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+        </ng-container>
+
+        <!-- Price -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let element"> ${{ element.price }} </td>
+        </ng-container>
+
+        <!-- Discount -->
+        <ng-container matColumnDef="discount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+          <td mat-cell *matCellDef="let element"> {{ element.discount }}% </td>
+        </ng-container>
+
+        <!-- Actions -->
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef class="action-column-header"> Action </th>
+          <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element" class="action-cell">
-            <button mat-button class="btn-edit" [routerLink]="['/admin/brands/edit', element._id]">
-              <span>Edit</span>
+            <button class="btn-edit" [routerLink]="['/admin/products/edit', element._id]">
+              Edit
             </button>
-            <button mat-button class="btn-delete" (click)="deleteBrand(element._id)">
-              <span>Delete</span>
+            <button class="btn-delete" (click)="deleteProduct(element._id)">
+              Delete
             </button>
           </td>
         </ng-container>
@@ -50,7 +71,7 @@
     </div>
 
     <ng-template #emptyState>
-      <p style="padding:1rem">No brands found.</p>
+      <p style="padding:1rem">No products found.</p>
     </ng-template>
   </div>
 </div>

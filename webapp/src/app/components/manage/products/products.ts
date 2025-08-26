@@ -6,57 +6,54 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BrandService } from '../../../services/brandservice';
-import { Brand } from '../../../types/brand';
-
+import { Productservice } from '../../../services/productservice';
+import { Product } from '../../../types/product';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule,
+  standalone: true,
+  imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterLink],
+    RouterLink
+  ],
   templateUrl: './products.html',
-  styleUrl: './products.scss'
+  styleUrls: ['./products.scss']
 })
-export class Products {
-  private brandService = inject(BrandService);
+export class ProductsComponent implements OnInit {
+  private productService = inject(Productservice);
 
-  displayedColumns: string[] = ['_id', 'name', 'action'];
-  dataSource = new MatTableDataSource<Brand>([]);
+  displayedColumns: string[] = ['_id', 'name', 'description', 'price', 'discount', 'action'];
+  dataSource = new MatTableDataSource<Product>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    this.dataSource.filterPredicate = (row: Brand, filter: string) => {
+    this.dataSource.filterPredicate = (row: Product, filter: string) => {
       const f = filter.trim().toLowerCase();
-      return (row.name?.toLowerCase().includes(f) ?? false) ||
-             (row._id?.toString().toLowerCase().includes(f) ?? false);
+      return (
+        (row.name?.toLowerCase().includes(f) ?? false) ||
+        (row._id?.toString().toLowerCase().includes(f) ?? false)
+      );
     };
 
-    this.brandService.getBrands().subscribe({
+    this.productService.getallproducts().subscribe({
       next: (raw: any) => {
-        console.log('Brands API raw response:', raw);
-
-        // Accept either array or {data: array}
-        const list: Brand[] = Array.isArray(raw) ? raw
-                          : Array.isArray(raw?.data) ? raw.data
-                          : [];
-
-        console.log('Parsed brand list:', list);
+        const list: Product[] = Array.isArray(raw)
+          ? raw
+          : Array.isArray(raw?.data)
+          ? raw.data
+          : [];
         this.dataSource.data = list;
-
-        // Attach paginator & sort after data arrives
         if (this.paginator) this.dataSource.paginator = this.paginator;
         if (this.sort) this.dataSource.sort = this.sort;
       },
-      error: (err) => {
-        console.error('Failed to load brands:', err);
-      }
+      error: (err) => console.error('Failed to load products:', err)
     });
   }
 
@@ -64,23 +61,12 @@ export class Products {
     this.dataSource.filter = (value ?? '').trim().toLowerCase();
   }
 
-  deleteBrand(id: string) {
-    console.log('Deleting brand with ID:', id);
-    this.brandService.deleteBrandsByID(id).subscribe({
-      next: (res) => {
-        console.log('Brand deleted:', res);
-        this.dataSource.data = this.dataSource.data.filter(b => b._id !== id);
+  deleteProduct(id: string) {
+    this.productService.deleteproduct(id).subscribe({
+      next: () => {
+        this.dataSource.data = this.dataSource.data.filter(p => p._id !== id);
       },
       error: (err) => console.error('Delete failed:', err)
     });
   }
-
-  onEdit(row: Brand) {
-    console.log('Edit brand:', row);
-  }
-
-  onDelete(row: Brand) {
-    this.deleteBrand(row._id);
-  }
-
 }
