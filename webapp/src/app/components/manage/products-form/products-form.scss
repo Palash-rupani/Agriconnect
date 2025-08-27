@@ -1,66 +1,88 @@
-.form-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
+.product-card {
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
-.form-title {
+/* Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1.5rem;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(90deg, #1e7e34, #28a745);
 }
 
-.form-grid {
+/* Form Grid */
+.product-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 20px;
+  padding: 1.5rem;
 }
 
-.form-field {
+.product-form .mat-form-field,
+.product-form mat-form-field {
+  width: 100%; /* ensure fields stretch */
+}
+
+/* Full-width fields */
+.full-width {
+  grid-column: 1 / -1; /* span both columns */
+}
+
+.image-section {
+  grid-column: 1 / -1;
+  background: #fff9e6;
+  border: 1px solid #ffe08a;
+  border-radius: 10px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
-.form-field.full-width {
-  grid-column: span 2;
+.image-field {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-label {
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-
-input, textarea, select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-textarea {
-  resize: none;
+.section-title {
+  font-weight: 600;
+  color: #856404;
+  margin-bottom: 0.5rem;
 }
 
 .form-actions {
-  grid-column: span 2;
-  text-align: center;
-  margin-top: 20px;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
 }
 
-button {
-  background: #2d7a46;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+button[mat-raised-button] {
   border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
 }
 
-button:hover {
-  background: #256538;
+/* Responsive */
+@media (max-width: 768px) {
+  .product-form {
+    grid-template-columns: 1fr; /* stack */
+  }
+
+  .full-width,
+  .form-actions,
+  .image-section {
+    grid-column: 1 / -1;
+  }
 }

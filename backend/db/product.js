@@ -10,6 +10,10 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category'  
   },
+  brandID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Brand'  
+  },
 });
 
 const Product = mongoose.model('Product', productSchema);
