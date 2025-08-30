@@ -1,88 +1,211 @@
-.product-card {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  max-width: 900px;
-  margin: 2rem auto;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
+// Palette (exactly 5 colors)
+$primary: #2563eb;
+$bg: #ffffff;
+$border: #e5e7eb;
+$text: #111827;
+$muted: #6b7280;
+
+:host {
+  display: block;
+  color: $text;
+}
+
+/* Card container */
+.form-container {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 24px;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
 }
 
 /* Header */
-.card-header {
+.form-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(90deg, #1e7e34, #28a745);
+  gap: 12px;
+  margin-bottom: 12px;
+
+  .title-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.09);
+    color: $primary;
+    font-size: 18px;
+  }
+
+  .title-stack {
+    display: grid;
+    gap: 2px;
+  }
+
+  .title-text {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .title-sub {
+    color: $muted;
+    font-size: 13px;
+  }
 }
 
-/* Form Grid */
-.product-form {
+/* Base grid of the form */
+.form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  gap: 20px;
-  padding: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 18px;
 }
 
-.product-form .mat-form-field,
-.product-form mat-form-field {
-  width: 100%; /* ensure fields stretch */
+/* Section blocks */
+.section {
+  display: block;
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $muted;
+    margin: 8px 0 6px;
+  }
+
+  .section-body {
+    background: #fcfcfc;
+    border: 1px solid $border;
+    border-radius: 12px;
+    padding: 14px;
+  }
 }
 
-/* Full-width fields */
-.full-width {
-  grid-column: 1 / -1; /* span both columns */
+/* Divider */
+.section-divider {
+  border: 0;
+  border-top: 1px dashed $border;
+  margin: -4px 0 4px;
 }
 
-.image-section {
+/* Grid helpers inside sections */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.span-2 {
   grid-column: 1 / -1;
-  background: #fff9e6;
-  border: 1px solid #ffe08a;
-  border-radius: 10px;
-  padding: 1rem;
+}
+
+/* Flags row */
+.flags {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .flag {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid $border;
+    border-radius: 10px;
+    background: #fff;
+    transition: box-shadow 140ms ease, transform 140ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(17, 24, 39, 0.06);
+    }
+
+    mat-checkbox {
+      color: $text;
+    }
+  }
 }
 
-.image-field {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.section-title {
-  font-weight: 600;
-  color: #856404;
-  margin-bottom: 0.5rem;
-}
-
+/* Actions row */
 .form-actions {
-  grid-column: 1 / -1;
   display: flex;
+  gap: 12px;
   justify-content: flex-end;
-  margin-top: 1rem;
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1px dashed $border;
+
+  button[mat-raised-button] {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    border-radius: 10px;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+    }
+  }
 }
 
-button[mat-raised-button] {
-  border-radius: 6px;
-  font-weight: 500;
-  padding: 0.5rem 1.2rem;
+/* Make fields fill their grid cells */
+.mat-mdc-form-field {
+  width: 100%;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .product-form {
-    grid-template-columns: 1fr; /* stack */
-  }
+/* Slightly taller textarea for better UX */
+textarea[matInput] {
+  min-height: 110px;
+}
 
-  .full-width,
-  .form-actions,
-  .image-section {
-    grid-column: 1 / -1;
-  }
+/* Subtle, safe Angular Material polish */
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 12px !important;
+  background: #fafafa;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper:hover {
+  background: #f7f7f7;
+}
+
+:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading,
+:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing,
+:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__notch {
+  border-color: rgba(37, 99, 235, 0.6) !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  padding: 0 8px;
+}
+
+:host ::ng-deep mat-hint {
+  color: $muted;
+  font-size: 12px;
+}
+
+:host ::ng-deep mat-error {
+  font-size: 12px;
+}
+
+/* Label tone */
+:host ::ng-deep .mat-mdc-form-field .mdc-floating-label {
+  color: $muted;
+}
+
+/* Select height parity */
+:host ::ng-deep .mat-mdc-select-trigger {
+  min-height: 40px;
+}
+
+/* Minor spacing normalize for top-level fields (if any placed directly) */
+.form-grid > .mat-mdc-form-field {
+  margin: 2px 0;
 }

@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Brand } from '../../../types/brand';
 import { category } from '../../../types/category';
 import { CategoryService } from '../../../services/category';
@@ -31,6 +32,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
   templateUrl: './products-form.html',
   styleUrls: ['./products-form.scss'],
@@ -46,6 +48,8 @@ export class ProductsForm {
     images: this.formBuilder.array([]),
     categoryID: [null, [Validators.required]],
     brandID: [null, [Validators.required]],
+    isnew: [false],       // ✅ match DB field exactly
+    isfeatured: [false],  // ✅ match DB field exactly
   });
 
   brands: Brand[] = [];
@@ -86,24 +90,14 @@ export class ProductsForm {
           description: data.description,
           price: data.price,
           discount: data.discount,
+          isnew: data.isnew ?? false,         // ✅ use isnew
+          isfeatured: data.isfeatured ?? false // ✅ use isfeatured
         });
 
         // Handle category + brand mapping safely
         this.productForm.patchValue({
-          categoryID:
-            data.categoryID ||
-            data.CategoryID ||
-            data.category_id ||
-            data.category ||
-            data.category?._id ||
-            null,
-          brandID:
-            data.brandID ||
-            data.BrandID ||
-            data.brand_id ||
-            data.brand ||
-            data.brand?._id ||
-            null,
+          categoryID: data.category?._id || data.categoryID || null,
+          brandID: data.brand?._id || data.brandID || null,
         });
 
         // Patch images
@@ -131,25 +125,44 @@ export class ProductsForm {
     this.images.removeAt(index);
   }
 
-  addproduct() {
+  Add() {
     if (this.productForm.invalid) return;
 
-    this.productservice
-      .addproduct(this.productForm.value as any)
-      .subscribe((result) => {
-        console.log('Product added successfully', result);
-        this.router.navigate(['/admin/products']);
-      });
+    const payload = {
+      ...this.productForm.value,
+    };
+
+    console.log('🚀 ADD PAYLOAD:', payload);
+
+    this.productservice.addproduct(payload as any).subscribe((result) => {
+      console.log('✅ Product added successfully', result);
+      this.router.navigate(['/admin/products']);
+    });
   }
 
   Update() {
     if (!this.id || this.productForm.invalid) return;
 
-    this.productservice
-      .updateproduct(this.id, this.productForm.value as any)
-      .subscribe((result) => {
-        console.log('Product updated successfully', result);
-        this.router.navigate(['/admin/products']);
-      });
+    const rawForm = this.productForm.value;
+
+    // ✅ Explicit payload mapping
+    const payload: any = {
+      name: rawForm.name,
+      description: rawForm.description,
+      price: rawForm.price,
+      discount: rawForm.discount,
+      images: rawForm.images || [],
+      brand: rawForm.brandID,        // API expects "brand"
+      category: rawForm.categoryID,  // API expects "category"
+      isnew: !!rawForm.isnew,        // ✅ fix: match backend
+      isfeatured: !!rawForm.isfeatured // ✅ fix: match backend
+    };
+
+    console.log('🚀 FINAL UPDATE PAYLOAD:', payload);
+
+    this.productservice.updateproduct(this.id, payload).subscribe((result) => {
+      console.log('✅ Product updated successfully', result);
+      this.router.navigate(['/admin/products']);
+    });
   }
 }

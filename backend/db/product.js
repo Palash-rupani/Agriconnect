@@ -14,6 +14,8 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Brand'  
   },
+  isfeatured: { type: Boolean, default: false },
+  isnew: { type: Boolean, default: false },
 });
 
 const Product = mongoose.model('Product', productSchema);

@@ -1,84 +1,105 @@
-<div class="product-card">
-  <h2 class="card-header">
-    <mat-icon>inventory_2</mat-icon>
-    {{ id ? 'Update Product' : 'Add Product' }}
-  </h2>
-
-  <form [formGroup]="productForm" class="product-form">
-    <!-- Row 1 -->
-    <mat-form-field appearance="fill">
-      <mat-label>📌 Product Name</mat-label>
-      <input matInput placeholder="Enter product name" formControlName="name" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>💰 Price</mat-label>
-      <input matInput type="number" placeholder="Enter price" formControlName="price" />
-    </mat-form-field>
-
-    <!-- Row 2 (Full width) -->
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>📝 Description</mat-label>
-      <textarea
-        matInput
-        rows="3"
-        placeholder="Enter product description"
-        formControlName="description"
-      ></textarea>
-    </mat-form-field>
-
-    <!-- Row 3 -->
-    <mat-form-field appearance="fill">
-      <mat-label>🏷️ Discount (%)</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter discount percentage"
-        formControlName="discount"
-      />
-    </mat-form-field>
-
-    <!-- Row 4 (Images full width) -->
-    <div formArrayName="images" class="image-section">
-      <label class="section-title">📸 Product Images</label>
-      <div *ngFor="let img of images.controls; let i = index" class="image-field">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Image URL</mat-label>
-          <input matInput [formControlName]="i" placeholder="Enter image URL" />
-        </mat-form-field>
-        <button mat-raised-button color="warn" (click)="removeImage(i)">Delete</button>
-      </div>
-      <button mat-raised-button color="accent" (click)="addImage()">➕ Add Image</button>
+<div class="form-container">
+  <header class="form-title">
+    <span class="title-icon" aria-hidden="true">➕</span>
+    <div class="title-stack">
+      <h2 class="title-text" *ngIf="!id">Add Product</h2>
+      <h2 class="title-text" *ngIf="id">Update Product</h2>
+      <p class="title-sub">Manage core details, pricing, and visibility.</p>
     </div>
+  </header>
 
-    <!-- Row 5 -->
-    <mat-form-field appearance="fill">
-      <mat-label>📁 Category</mat-label>
-      <mat-select formControlName="categoryID">
-        <mat-option *ngIf="isLoadingCategories" disabled>Loading...</mat-option>
-        <mat-option *ngFor="let cat of categories" [value]="cat._id">{{ cat.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form class="form-grid" [formGroup]="productForm">
+     Details Section
+    <section class="section full-width">
+      <h3 class="section-title">Details</h3>
+      <div class="section-body grid-2">
+         Product Name
+        <mat-form-field appearance="fill" class="span-2">
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Enter product name" formControlName="name" />
+          <mat-hint align="start">A clear, concise name works best.</mat-hint>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>🏢 Brand</mat-label>
-      <mat-select formControlName="brandID">
-        <mat-option *ngIf="isLoadingBrands" disabled>Loading...</mat-option>
-        <mat-option *ngFor="let brand of brands" [value]="brand._id">{{ brand.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+         Description
+        <mat-form-field appearance="fill" class="span-2">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+          <mat-hint align="start">Include key features or materials.</mat-hint>
+        </mat-form-field>
+      </div>
+    </section>
 
-    <!-- Actions (full width) -->
+    <hr class="section-divider" />
+
+     Pricing Section
+    <section class="section full-width">
+      <h3 class="section-title">Pricing</h3>
+      <div class="section-body grid-2">
+         Price
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price" />
+          <mat-hint align="start">Set the base price.</mat-hint>
+        </mat-form-field>
+
+         Discount
+        <mat-form-field appearance="fill">
+          <mat-label>Discount</mat-label>
+          <input matInput type="number" formControlName="discount" />
+          <mat-hint align="start">Optional. Leave 0 if none.</mat-hint>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+     Meta Section
+    <section class="section full-width">
+      <h3 class="section-title">Meta</h3>
+      <div class="section-body grid-2">
+         Category
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoryID">
+            <mat-option *ngFor="let c of categories" [value]="c._id">
+              {{ c.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint align="start">Choose the most specific fit.</mat-hint>
+        </mat-form-field>
+
+         Brand
+        <mat-form-field appearance="fill">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="brandID">
+            <mat-option *ngFor="let b of brands" [value]="b._id">
+              {{ b.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint align="start">If applicable.</mat-hint>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+     Flags Section
+    <section class="section full-width">
+      <h3 class="section-title">Visibility</h3>
+      <div class="section-body flags">
+        <label class="flag">
+          <mat-checkbox formControlName="isnew">Is New</mat-checkbox>
+        </label>
+        <label class="flag">
+          <mat-checkbox formControlName="isfeatured">Is Featured</mat-checkbox>
+        </label>
+      </div>
+    </section>
+
+     Actions
     <div class="form-actions">
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="productForm.invalid"
-        (click)="id ? Update() : addproduct()"
-      >
-        <mat-icon>save</mat-icon>
-        {{ id ? 'Update Product' : 'Save Product' }}
-      </button>
+      <button mat-raised-button color="primary" *ngIf="!id" (click)="Add()">Add Product</button>
+      <button mat-raised-button color="accent" *ngIf="id" (click)="Update()">Update Product</button>
     </div>
   </form>
 </div>
