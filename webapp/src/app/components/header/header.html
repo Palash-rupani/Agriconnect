@@ -1,182 +1,5 @@
-
 <header class="agc-header" role="banner">
-  <style>
-    /* AgriConnect palette (exactly 5 colors) */
-    :root {
-      --agc-primary: #2e7d32; /* green */
-      --agc-bg: #ffffff;      /* white */
-      --agc-text: #1f2937;    /* gray-800 */
-      --agc-border: #e5e7eb;  /* gray-200 */
-      --agc-accent: #f59e0b;  /* amber */
-    }
-
-    .agc-header {
-      background: var(--agc-bg);
-      color: var(--agc-text);
-      border-bottom: 1px solid var(--agc-border);
-    }
-
-    .agc-topbar {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .agc-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--agc-primary);
-      white-space: nowrap;
-    }
-    .agc-brand-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: rgba(46, 125, 50, 0.1);
-      display: grid;
-      place-items: center;
-      font-size: 14px;
-    }
-
-    .agc-nav {
-      margin-left: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .agc-link {
-      padding: 6px 10px;
-      border-radius: 8px;
-      color: var(--agc-text);
-      text-decoration: none;
-      border: 1px solid transparent;
-      transition: background-color 140ms ease, border-color 140ms ease;
-    }
-    .agc-link:hover {
-      background: #fafafa;
-      border-color: var(--agc-border);
-    }
-    .agc-link--active {
-      color: var(--agc-primary);
-      border-color: rgba(46,125,50,0.25);
-      background: rgba(46,125,50,0.06);
-    }
-
-    .agc-spacer {
-      flex: 1 1 auto;
-    }
-
-    .agc-search {
-      position: relative;
-      min-width: 0;
-      flex: 1 1 320px;
-      max-width: 460px;
-    }
-    .agc-search input[type="search"] {
-      width: 100%;
-      padding: 10px 36px 10px 12px;
-      border: 1px solid var(--agc-border);
-      border-radius: 10px;
-      outline: none;
-      background: #fafafa;
-      color: var(--agc-text);
-      transition: border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
-    }
-    .agc-search input[type="search"]::placeholder {
-      color: #6b7280;
-    }
-    .agc-search input[type="search"]:hover {
-      background: #f7f7f7;
-    }
-    .agc-search input[type="search"]:focus {
-      border-color: rgba(46,125,50,0.6);
-      box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
-      background: #fff;
-    }
-    .agc-search button {
-      position: absolute;
-      right: 6px;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 30px;
-      padding: 0 10px;
-      border-radius: 8px;
-      border: 1px solid var(--agc-border);
-      background: var(--agc-bg);
-      color: var(--agc-primary);
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 140ms ease, box-shadow 140ms ease;
-    }
-    .agc-search button:hover {
-      background: rgba(46,125,50,0.06);
-      box-shadow: 0 6px 14px rgba(46,125,50,0.15);
-    }
-
-    /* Categories row */
-    .agc-categories {
-      border-top: 1px solid var(--agc-border);
-      background: #fcfcfc;
-    }
-    .agc-categories-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 16px;
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: thin;
-    }
-    .agc-chip {
-      flex: 0 0 auto;
-      padding: 6px 10px;
-      border: 1px solid var(--agc-border);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--agc-text);
-      font-size: 14px;
-      white-space: nowrap;
-      transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, color 120ms ease;
-    }
-    .agc-chip:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(17,24,39,0.06);
-      border-color: rgba(46,125,50,0.3);
-      color: var(--agc-primary);
-    }
-    .agc-chip--accent {
-      border-color: rgba(245,158,11,0.45);
-      background: rgba(245,158,11,0.08);
-      color: #8a5a00;
-    }
-
-    /* Mobile-first layout tweaks */
-    @media (max-width: 640px) {
-      .agc-topbar {
-        flex-wrap: wrap;
-      }
-      .agc-nav {
-        order: 3;
-        width: 100%;
-      }
-      .agc-search {
-        order: 2;
-        flex-basis: 100%;
-        max-width: none;
-      }
-      .agc-brand {
-        order: 1;
-        flex: 1 0 auto;
-      }
-    }
-  </style>
-
+  <!-- Top bar -->
   <div class="agc-topbar">
     <a class="agc-brand" href="#">
       <span class="agc-brand-badge" aria-hidden="true">🌿</span>
@@ -184,29 +7,35 @@
     </a>
 
     <nav class="agc-nav" aria-label="Primary">
-       Replace href with routerLink if using Angular Router
       <a class="agc-link agc-link--active" href="#">Home</a>
-      <a class="agc-link" href="#">My Profile</a>
+      <a class="agc-link" [routerLink]="'/'">My Profile</a>
     </nav>
 
-    <div class="agc-spacer"></div>
-
-    <form class="agc-search" role="search" aria-label="Site">
+    <div class="agc-search" role="search" aria-label="Site">
       <label class="sr-only" for="agc-site-search">Search</label>
-      <input id="agc-site-search" type="search" name="q" placeholder="Search products, suppliers, services..." />
-      <button type="submit" aria-label="Search">Search</button>
-    </form>
+      <input
+        id="agc-site-search"
+        type="search"
+        placeholder="Search products, suppliers, services..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button type="button" (click)="onSearch()" aria-label="Search">
+        Search
+      </button>
+    </div>
   </div>
 
-<div class="agc-categories">
-  <nav class="agc-categories-inner" aria-label="Categories">
-    <a
-      *ngFor="let category of categorylist"
-      class="agc-chip"
-      [class.agc-chip--accent]="category.name === 'All'"
-      href="#">
-      {{ category.name }}
-    </a>
-  </nav>
-</div>
+  <!-- Categories -->
+  <div class="agc-categories">
+    <nav class="agc-categories-inner" aria-label="Categories">
+      <a
+        *ngFor="let category of categorylist"
+        class="agc-chip"
+        [class.agc-chip--accent]="category.name === 'All'"
+      >
+        {{ category.name }}
+      </a>
+    </nav>
+  </div>
 </header>

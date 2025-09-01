@@ -6,6 +6,9 @@ import { Brands } from './components/manage/brands/brands';
 import { BrandsForm } from './components/manage/brands-form/brands-form';
 import { ProductsComponent } from './components/manage/products/products'; // ✅ FIXED
 import { ProductsForm } from './components/manage/products-form/products-form';
+import { Product } from './types/product';
+import { ProductList } from './components/product-list/product-list';
+import { ProductDetails } from './components/product-details/product-details';
 
 export const routes: Routes = [
   {
@@ -47,5 +50,13 @@ export const routes: Routes = [
   {
     path: 'admin/products/edit/:id',
     component: ProductsForm
+  },
+  {
+    path: 'products',
+    component: ProductList
+  },
+  {
+    path: 'products/:id',
+    component: ProductDetails
   }
 ];

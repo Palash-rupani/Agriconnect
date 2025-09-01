@@ -21,35 +21,16 @@
   <section id="new" class="section" aria-labelledby="new-title">
     <div class="section__header">
       <h2 id="new-title" class="section__title">New arrivals</h2>
-      <span class="section__link">View all</span>
+      <span class="section__link" [routerLink]="'/products'">View all</span>
     </div>
 
     <div class="grid">
-      <article
-        class="card"
+      <app-product-card
         *ngFor="let product of newProducts"
-        [attr.aria-label]="product.name"
+        [product]="product"
+        [currentImage]="getCurrentImage(product)"
       >
-        <div class="card__media">
-          <img
-            [src]="getCurrentImage(product)"
-            [alt]="product.name + ' product image'"
-            class="object-cover w-full h-64 rounded-md"
-          />
-          <span class="card__badge" aria-hidden="true">New</span>
-        </div>
-        <div class="card__content">
-          <h3 class="card__title">{{ product.name }}</h3>
-          <div class="card__meta">
-            <span>{{ product.categoryID || 'General' }}</span>
-            <span class="price">${{ product.price }}</span>
-          </div>
-          <div class="card__actions">
-            <button class="btn">Details</button>
-            <button class="btn btn--primary">Add to cart</button>
-          </div>
-        </div>
-      </article>
+      </app-product-card>
     </div>
   </section>
 
@@ -57,35 +38,16 @@
   <section id="featured" class="section" aria-labelledby="featured-title">
     <div class="section__header">
       <h2 id="featured-title" class="section__title">Featured products</h2>
-      <span class="section__link">View all</span>
+      <span class="section__link" [routerLink]="'/products'">View all</span>
     </div>
 
     <div class="grid">
-      <article
-        class="card"
+      <app-product-card
         *ngFor="let product of featuredProducts"
-        [attr.aria-label]="product.name"
+        [product]="product"
+        [currentImage]="getCurrentImage(product)"
       >
-        <div class="card__media">
-          <img
-            [src]="getCurrentImage(product)"
-            [alt]="product.name + ' product image'"
-            class="object-cover w-full h-64 rounded-md"
-          />
-          <span class="card__badge" aria-hidden="true">Featured</span>
-        </div>
-        <div class="card__content">
-          <h3 class="card__title">{{ product.name }}</h3>
-          <div class="card__meta">
-            <span>{{ product.categoryID || 'General' }}</span>
-            <span class="price">${{ product.price }}</span>
-          </div>
-          <div class="card__actions">
-            <button class="btn">Details</button>
-            <button class="btn btn--primary">Add to cart</button>
-          </div>
-        </div>
-      </article>
+      </app-product-card>
     </div>
   </section>
 </main>

@@ -1,0 +1,137 @@
+:host {
+  --agri-primary: #2F855A;
+  --agri-accent:  #8B5E34;
+  --ink:          #111827;
+  --muted:        #6B7280;
+  --surface:      #FFFFFF;
+  display: block;
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.06);
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+.card:hover {
+  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.12);
+  transform: translateY(-2px);
+  border-color: rgba(17, 24, 39, 0.12);
+}
+
+/* Media & Badge */
+.card__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.card__media img {
+  display: block;
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--agri-primary);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  box-shadow: 0 2px 8px rgba(47, 133, 90, 0.35);
+}
+
+/* Content */
+.card__content {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card__title {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* For Safari/Chrome */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Add standard property for compatibility */
+  line-clamp: 2;
+}
+
+
+/* Meta & Pricing */
+.card__meta span {
+  color: var(--muted);
+}
+.price-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.price {
+  color: var(--agri-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.price-old {
+  color: rgba(17, 24, 39, 0.45);
+  text-decoration: line-through;
+  font-size: 0.9rem;
+}
+.price-discount {
+  color: var(--agri-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Actions & Buttons */
+.card__actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+.btn {
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+.btn:hover {
+  border-color: rgba(17, 24, 39, 0.24);
+  background: #fafafa;
+  transform: translateY(-1px);
+}
+.btn--primary {
+  background: var(--agri-primary);
+  border-color: var(--agri-primary);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: #276749;
+  border-color: #276749;
+}
+.btn--primary:active {
+  background: #22543D;
+  border-color: #22543D;
+}

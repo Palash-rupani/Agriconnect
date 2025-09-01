@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { inject } from '@angular/core';
 import { Customer } from '../../services/customer';
 import { Product } from '../../types/product';
+import { ProductsComponent } from '../manage/products/products';
+import { ProductCard } from '../product-card/product-card';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule,ProductCard,RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

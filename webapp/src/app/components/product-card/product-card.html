@@ -1,0 +1,46 @@
+<article class="card" [attr.aria-label]="product.name">
+  <!-- Media -->
+  <div class="card__media" [routerLink]="'/products/' + product._id">
+    <img
+      [src]="currentImage"
+      [alt]="product.name + ' product image'"
+    />
+    <span *ngIf="badgeLabel" class="card__badge">
+      {{ badgeLabel }}
+    </span>
+  </div>
+
+  <!-- Content -->
+  <div class="card__content" >
+    <!-- Title -->
+    <h3 class="card__title">{{ product.name }}</h3>
+
+    <!-- Meta -->
+    <div class="card__meta">
+      <span>{{ product.categoryID || 'General' }}</span>
+
+      <!-- Price Block -->
+      <div class="price-block">
+        <span class="price">
+          ${{ finalPrice | number: '1.2-2' }}
+        </span>
+
+        <span *ngIf="hasDiscount" class="price-old">
+          ${{ product.price }}
+        </span>
+
+        <span *ngIf="hasDiscount" class="price-discount">
+          ({{ product.discount }}% off)
+        </span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="card__actions">
+      <button class="btn" [routerLink]="'/products/' + product._id">
+  Details
+</button>
+      <button class="btn btn--primary">Add to cart</button>
+    </div>
+  </div>
+</article>
