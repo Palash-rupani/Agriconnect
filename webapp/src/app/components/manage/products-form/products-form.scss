@@ -209,3 +209,32 @@ textarea[matInput] {
 .form-grid > .mat-mdc-form-field {
   margin: 2px 0;
 }
+.image-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-card img {
+  width: 100%;
+  height: 200px;         /* fixed height for uniformity */
+  object-fit: cover;     /* crop nicely instead of squishing */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+

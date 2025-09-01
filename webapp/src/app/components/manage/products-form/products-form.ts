@@ -4,6 +4,7 @@ import {
   FormBuilder,
   Validators,
   FormArray,
+  FormControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -111,6 +112,9 @@ export class ProductsForm {
         console.log('Form after patch:', this.productForm.value);
       });
     }
+  }
+  get imageControls() {
+  return this.images.controls as FormControl[];
   }
 
   get images() {

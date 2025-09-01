@@ -1,4 +1,5 @@
 <div class="form-container">
+  <!-- Title -->
   <header class="form-title">
     <span class="title-icon" aria-hidden="true">➕</span>
     <div class="title-stack">
@@ -8,22 +9,27 @@
     </div>
   </header>
 
+  <!-- Form -->
   <form class="form-grid" [formGroup]="productForm">
-     Details Section
+    <!-- Details Section -->
     <section class="section full-width">
       <h3 class="section-title">Details</h3>
       <div class="section-body grid-2">
-         Product Name
+        <!-- Product Name -->
         <mat-form-field appearance="fill" class="span-2">
           <mat-label>Product Name</mat-label>
           <input matInput placeholder="Enter product name" formControlName="name" />
           <mat-hint align="start">A clear, concise name works best.</mat-hint>
         </mat-form-field>
 
-         Description
+        <!-- Description -->
         <mat-form-field appearance="fill" class="span-2">
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+          <textarea
+            matInput
+            placeholder="Enter product description"
+            formControlName="description"
+          ></textarea>
           <mat-hint align="start">Include key features or materials.</mat-hint>
         </mat-form-field>
       </div>
@@ -31,18 +37,18 @@
 
     <hr class="section-divider" />
 
-     Pricing Section
+    <!-- Pricing Section -->
     <section class="section full-width">
       <h3 class="section-title">Pricing</h3>
       <div class="section-body grid-2">
-         Price
+        <!-- Price -->
         <mat-form-field appearance="fill">
           <mat-label>Price</mat-label>
           <input matInput type="number" formControlName="price" />
           <mat-hint align="start">Set the base price.</mat-hint>
         </mat-form-field>
 
-         Discount
+        <!-- Discount -->
         <mat-form-field appearance="fill">
           <mat-label>Discount</mat-label>
           <input matInput type="number" formControlName="discount" />
@@ -53,11 +59,11 @@
 
     <hr class="section-divider" />
 
-     Meta Section
+    <!-- Meta Section -->
     <section class="section full-width">
       <h3 class="section-title">Meta</h3>
       <div class="section-body grid-2">
-         Category
+        <!-- Category -->
         <mat-form-field appearance="fill">
           <mat-label>Category</mat-label>
           <mat-select formControlName="categoryID">
@@ -68,7 +74,7 @@
           <mat-hint align="start">Choose the most specific fit.</mat-hint>
         </mat-form-field>
 
-         Brand
+        <!-- Brand -->
         <mat-form-field appearance="fill">
           <mat-label>Brand</mat-label>
           <mat-select formControlName="brandID">
@@ -83,7 +89,7 @@
 
     <hr class="section-divider" />
 
-     Flags Section
+    <!-- Flags Section -->
     <section class="section full-width">
       <h3 class="section-title">Visibility</h3>
       <div class="section-body flags">
@@ -96,7 +102,39 @@
       </div>
     </section>
 
-     Actions
+    <hr class="section-divider" />
+
+    <!-- 🌟 Images Section -->
+    <section class="section full-width" formArrayName="images">
+      <h3 class="section-title">Images</h3>
+
+      <div class="section-body">
+        <div *ngFor="let imgCtrl of imageControls; let i = index" class="image-row">
+          <!-- Image URL input -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Image URL {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" placeholder="Enter image URL" />
+
+            <!-- Delete button inside -->
+            <button mat-icon-button matSuffix color="warn" type="button" (click)="removeImage(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <!-- Preview -->
+          <div class="image-preview" *ngIf="imgCtrl.value">
+            <img [src]="imgCtrl.value" alt="Preview" height="100" />
+          </div>
+        </div>
+
+        <!-- Add Image Button -->
+        <button mat-stroked-button color="primary" type="button" (click)="addImage()">
+          <mat-icon>add</mat-icon> Add Image
+        </button>
+      </div>
+    </section>
+
+    <!-- Actions -->
     <div class="form-actions">
       <button mat-raised-button color="primary" *ngIf="!id" (click)="Add()">Add Product</button>
       <button mat-raised-button color="accent" *ngIf="id" (click)="Update()">Update Product</button>

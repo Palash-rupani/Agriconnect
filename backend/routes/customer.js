@@ -12,7 +12,7 @@ const {
 
 // New products
 // New products
-router.get('/home/new', async (req, res) => {
+router.get('/new', async (req, res) => {
   try {
     const products = await getnewproducts();
     res.json(products);
@@ -23,7 +23,7 @@ router.get('/home/new', async (req, res) => {
 });
 
 // Featured products
-router.get('/home/featured', async (req, res) => {
+router.get('/featured', async (req, res) => {
   try {
     const products = await getfeaturedproducts();
     res.json(products);

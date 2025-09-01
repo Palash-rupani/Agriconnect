@@ -1,1 +1,91 @@
-<p>home works!</p>
+<main id="main" class="container" role="main">
+  <!-- Hero Section -->
+  <div class="bg-gradient-to-r from-green-50 to-white py-16 px-6 text-center">
+    <p class="text-green-700 font-medium mb-3">Modern farming, simplified</p>
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+      Curated agricultural products<br />
+      for efficient, sustainable operations
+    </h1>
+    <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+      Discover new tools and featured essentials trusted by growers.
+      Minimal, useful, and built for real work in the field.
+    </p>
+    <button
+      class="bg-green-600 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:bg-green-700 transition"
+    >
+      Browse new products →
+    </button>
+  </div>
+
+  <!-- New Arrivals -->
+  <section id="new" class="section" aria-labelledby="new-title">
+    <div class="section__header">
+      <h2 id="new-title" class="section__title">New arrivals</h2>
+      <span class="section__link">View all</span>
+    </div>
+
+    <div class="grid">
+      <article
+        class="card"
+        *ngFor="let product of newProducts"
+        [attr.aria-label]="product.name"
+      >
+        <div class="card__media">
+          <img
+            [src]="getCurrentImage(product)"
+            [alt]="product.name + ' product image'"
+            class="object-cover w-full h-64 rounded-md"
+          />
+          <span class="card__badge" aria-hidden="true">New</span>
+        </div>
+        <div class="card__content">
+          <h3 class="card__title">{{ product.name }}</h3>
+          <div class="card__meta">
+            <span>{{ product.categoryID || 'General' }}</span>
+            <span class="price">${{ product.price }}</span>
+          </div>
+          <div class="card__actions">
+            <button class="btn">Details</button>
+            <button class="btn btn--primary">Add to cart</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="featured" class="section" aria-labelledby="featured-title">
+    <div class="section__header">
+      <h2 id="featured-title" class="section__title">Featured products</h2>
+      <span class="section__link">View all</span>
+    </div>
+
+    <div class="grid">
+      <article
+        class="card"
+        *ngFor="let product of featuredProducts"
+        [attr.aria-label]="product.name"
+      >
+        <div class="card__media">
+          <img
+            [src]="getCurrentImage(product)"
+            [alt]="product.name + ' product image'"
+            class="object-cover w-full h-64 rounded-md"
+          />
+          <span class="card__badge" aria-hidden="true">Featured</span>
+        </div>
+        <div class="card__content">
+          <h3 class="card__title">{{ product.name }}</h3>
+          <div class="card__meta">
+            <span>{{ product.categoryID || 'General' }}</span>
+            <span class="price">${{ product.price }}</span>
+          </div>
+          <div class="card__actions">
+            <button class="btn">Details</button>
+            <button class="btn btn--primary">Add to cart</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
