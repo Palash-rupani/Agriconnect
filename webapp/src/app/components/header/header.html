@@ -1,16 +1,19 @@
 <header class="agc-header" role="banner">
   <!-- Top bar -->
   <div class="agc-topbar">
+    <!-- Brand -->
     <a class="agc-brand" href="#">
       <span class="agc-brand-badge" aria-hidden="true">🌿</span>
       <span>AgriConnect</span>
     </a>
 
+    <!-- Navigation -->
     <nav class="agc-nav" aria-label="Primary">
-      <a class="agc-link agc-link--active" href="#">Home</a>
-      <a class="agc-link" [routerLink]="'/'">My Profile</a>
+      <a class="agc-link agc-link--active" routerLink="/">Home</a>
+      <a class="agc-link" routerLink="/profile">My Profile</a>
     </nav>
 
+    <!-- Search -->
     <div class="agc-search" role="search" aria-label="Site">
       <label class="sr-only" for="agc-site-search">Search</label>
       <input
@@ -32,7 +35,10 @@
       <a
         *ngFor="let category of categorylist"
         class="agc-chip"
-        [class.agc-chip--accent]="category.name === 'All'"
+        role="button"
+        tabindex="0"
+        [class.agc-chip--active]="activeCategory === category._id"
+        (click)="onCategorySelect(category._id)"
       >
         {{ category.name }}
       </a>
