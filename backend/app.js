@@ -7,6 +7,8 @@ const categoryRoutes = require('./routes/category')
 const brandRoutes = require('./routes/brand')
 const productRoutes = require('./routes/product')
 const customerRoutes = require('./routes/customer')
+const authRoutes = require('./routes/auth')
+const { verifyToken } = require('./middleware/auth-middleware')
 
 app.use(cors())
 app.use(express.json())
@@ -15,8 +17,9 @@ app.get('/', (req, res) => {
   res.send('server running')
 })
 
+app.use("/auth",authRoutes)
 app.use("/product",productRoutes)
-app.use("/category",categoryRoutes)
+app.use("/category",verifyToken,categoryRoutes)
 app.use("/brands",brandRoutes)
 app.use("/customer",customerRoutes)
 
