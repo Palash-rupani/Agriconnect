@@ -9,6 +9,7 @@ import { ProductsForm } from './components/manage/products-form/products-form';
 import { Product } from './types/product';
 import { ProductList } from './components/product-list/product-list';
 import { ProductDetails } from './components/product-details/product-details';
+import { Register } from './components/register/register';
 
 export const routes: Routes = [
   {
@@ -58,5 +59,9 @@ export const routes: Routes = [
   {
     path: 'products/:id',
     component: ProductDetails
+  },
+  {
+    path: 'register',
+    component: Register
   }
 ];

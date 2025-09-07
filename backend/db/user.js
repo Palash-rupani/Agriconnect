@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
     email: String,
     password: String,
     isAdmin: Boolean,
+    isfarmer: Boolean,
  });
 
  const User = mongoose.model('User', userSchema);

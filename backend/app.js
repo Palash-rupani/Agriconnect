@@ -8,7 +8,7 @@ const brandRoutes = require('./routes/brand')
 const productRoutes = require('./routes/product')
 const customerRoutes = require('./routes/customer')
 const authRoutes = require('./routes/auth')
-const { verifyToken } = require('./middleware/auth-middleware')
+const { verifyToken, verifyAdmin, verifyfarmer } = require('./middleware/auth-middleware')
 
 app.use(cors())
 app.use(express.json())
@@ -18,10 +18,10 @@ app.get('/', (req, res) => {
 })
 
 app.use("/auth",authRoutes)
-app.use("/product",productRoutes)
-app.use("/category",verifyToken,categoryRoutes)
-app.use("/brands",brandRoutes)
-app.use("/customer",customerRoutes)
+app.use("/product",verifyToken,verifyfarmer,productRoutes)
+app.use("/category",verifyToken,verifyAdmin,categoryRoutes)
+app.use("/brands",verifyToken,verifyAdmin,brandRoutes)
+app.use("/customer",verifyToken,customerRoutes)
 
 
 async function connectDB() {

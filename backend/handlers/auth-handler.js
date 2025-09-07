@@ -26,7 +26,7 @@ async function loginUser(model) {
 
     // ✅ create JWT
     const jwtToken = jwt.sign(
-        { id: existingUser._id, name: existingUser.name, email: existingUser.email ,isadmin: existingUser.isAdmin},
+        { id: existingUser._id, name: existingUser.name, email: existingUser.email ,isadmin: existingUser.isAdmin,isfarmer: existingUser.isfarmer},
         'jwtkey121',
         { expiresIn: '1h' }
     );

@@ -1,0 +1,15 @@
+// Custom AgriConnect theme colors
+$agri-green: #22c55e;
+$agri-dark-green: #16a34a;
+$agri-light-green: #dcfce7;
+$agri-brown: #92400e;
+$agri-light-brown: #fef3c7;
+
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  transition: color 0.2s ease-in-out;
+}
