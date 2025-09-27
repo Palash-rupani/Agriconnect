@@ -4,11 +4,13 @@ const jwt = require('jsonwebtoken');
 
 async function registerUser(model) {
     const hashedPassword = await bcrypt.hash(model.password, 10);
-    const newUser = new user({
-        name: model.name,
-        email: model.email,
-        password: hashedPassword,
-    });
+const newUser = new user({
+    name: model.name,
+    email: model.email,
+    password: hashedPassword,
+    isFarmer: model.isFarmer === true,   // ✅ force boolean
+    isAdmin: false                        // optional, keep default
+});
     await newUser.save();
     return { message: "User registered successfully" };
 }

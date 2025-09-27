@@ -1,3 +1,4 @@
+// middleware/auth-middleware.js
 const jwt= require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
@@ -16,24 +17,23 @@ function verifyToken(req, res, next) {
 }
 
 function verifyAdmin(req, res, next) {
-    if(req.user && req.user.isadmin) {
+    if(req.user && req.user.isAdmin) {
         next();
     } else {
         return res.status(403).send({message: "Admin Access Required"});
     }
 }
 
-function verifyfarmer(req, res, next) {
-    if(req.user && req.user.isfarmer) {
+// 👇 renamed consistently
+function verifyFarmer(req, res, next) {
+    if(req.user && req.user.isFarmer) {
         next();
-    }
-    else if(req.user && req.user.isadmin){
+    } else if(req.user && req.user.isAdmin) {
         next();
-    }
-    else {
-        return res.status(403).send({message: "Admin Access Required"});
+    } else {
+        return res.status(403).send({message: "Farmer Access Required"});
     }
 }
 
-
-module.exports = { verifyToken ,verifyAdmin,verifyfarmer};
+// ✅ export with same name
+module.exports = { verifyToken, verifyAdmin, verifyFarmer };

@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
- const userSchema = new mongoose.Schema({
+// ✅ Schema
+const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    isAdmin: Boolean,
-    isfarmer: Boolean,
- });
+    isAdmin: { type: Boolean, default: false },
+    isFarmer: { type: Boolean, default: false },  // 👈 camelCase
+});
+
 
  const User = mongoose.model('User', userSchema);
  module.exports = User;

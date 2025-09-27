@@ -1,11 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,  // ✅ needed for formGroup & formControlName
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule
+  ],
   templateUrl: './register.html',
-  styleUrl: './register.scss'
+  styleUrls: ['./register.scss']
 })
 export class Register {
+  private formbuilder = inject(FormBuilder);
 
+registerForm = this.formbuilder.group({
+  name: ['', [Validators.required]],
+  email: ['', [Validators.required, Validators.email]],
+  password: ['', [Validators.required, Validators.minLength(6)]],
+  isFarmer: [false],   // ✅ camelCase
+});
+
+  authservice=inject(Auth);
+  register() {
+  console.log(this.registerForm.value);
+  const values = this.registerForm.value;
+  this.authservice.register(values.name!, values.email!, values.password!, values.isFarmer!).subscribe({
+    next: (res) => {
+      console.log(res);
+      alert('Registration successful!');
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Registration failed!');
+    }
+  });
+}
 }
