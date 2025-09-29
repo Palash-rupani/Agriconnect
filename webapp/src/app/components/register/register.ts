@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { Auth } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +33,7 @@ registerForm = this.formbuilder.group({
 });
 
   authservice=inject(Auth);
+  Router=inject(Router);
   register() {
   console.log(this.registerForm.value);
   const values = this.registerForm.value;
@@ -39,6 +41,7 @@ registerForm = this.formbuilder.group({
     next: (res) => {
       console.log(res);
       alert('Registration successful!');
+      this.Router.navigate(['/login']);
     },
     error: (err) => {
       console.error(err);

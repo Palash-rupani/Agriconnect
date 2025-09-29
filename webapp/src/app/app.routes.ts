@@ -10,6 +10,7 @@ import { Product } from './types/product';
 import { ProductList } from './components/product-list/product-list';
 import { ProductDetails } from './components/product-details/product-details';
 import { Register } from './components/register/register';
+import { Login } from './components/login/login';
 
 export const routes: Routes = [
   {
@@ -63,5 +64,9 @@ export const routes: Routes = [
   {
     path: 'register',
     component: Register
+  },
+  {
+    path: 'login',
+    component: Login
   }
 ];

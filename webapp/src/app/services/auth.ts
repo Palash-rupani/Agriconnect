@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Register } from '../components/register/register';
 import { environment } from '../../environments/environment';
+import { Login } from '../components/login/login';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,12 @@ register(name:string,email:string,password:string,isFarmer:boolean){
     name,email,password,isFarmer
   });
 }
+login( email:string,password:string){
+  return this.HttpClient.post(environment.apiUrl+'/auth/login',{
+    email,password
+  });
+}
+
 
 
 }

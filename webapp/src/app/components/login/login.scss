@@ -1,0 +1,101 @@
+
+// AgriConnect theme colors
+$agri-green: #22c55e;
+$agri-dark-green: #16a34a;
+$agri-light-green: #dcfce7;
+$agri-bg: #f0fdf4;
+$agri-text: #1f2937;
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, $agri-light-green, $agri-bg);
+
+  /* cross-browser compatibility */
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+
+.login-container {
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+
+    .logo-icon {
+      font-size: 2rem;
+      color: $agri-green;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $agri-text;
+      margin: 0;
+    }
+  }
+
+  h2 {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: $agri-text;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .forgot {
+        font-size: 0.9rem;
+        color: $agri-green;
+        text-decoration: none;
+
+        &:hover {
+          color: $agri-dark-green;
+        }
+      }
+    }
+
+    button {
+      padding: 0.8rem;
+      background: $agri-green;
+      border: none;
+      border-radius: 0.6rem;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: $agri-dark-green;
+      }
+    }
+  }
+}
+
