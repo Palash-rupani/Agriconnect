@@ -17,4 +17,7 @@ export class Customer {
   getFeaturedProducts() {
     return this.http.get<Product[]>(environment.apiUrl+'/customer/featured');
   }
+  getcategories() {
+    return this.http.get<Product[]>(environment.apiUrl+'/customer/categories');
+  }
 }

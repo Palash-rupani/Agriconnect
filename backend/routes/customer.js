@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { getCategory } = require('../handlers/category-handler');
 const {
   addProduct,
   updateproduct,
@@ -32,5 +33,10 @@ router.get('/featured', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+router.get("/categories", async (req, res) => {
+    let categories = await getCategory();
+    res.send(categories);
+})
 
 module.exports = router;

@@ -36,6 +36,8 @@ export class Categories implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>([]);
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+    console.log('Stored Token in Categories Component:', token);
     this.categoryService.getCategories().subscribe((data: PeriodicElement[]) => {
       this.dataSource.data = data;
     });

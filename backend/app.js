@@ -8,7 +8,7 @@ const brandRoutes = require('./routes/brand')
 const productRoutes = require('./routes/product')
 const customerRoutes = require('./routes/customer')
 const authRoutes = require('./routes/auth')
-const { verifyToken, verifyAdmin, verifyFarmer } = require('./middleware/auth-middleware')
+const { verifyToken, verifyAdmin} = require('./middleware/auth-middleware')
 
 app.use(cors())
 app.use(express.json())
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/auth",authRoutes)
-app.use("/product",verifyToken,verifyFarmer,productRoutes)
+app.use("/product",verifyToken,verifyAdmin,productRoutes)
 app.use("/category",verifyToken,verifyAdmin,categoryRoutes)
 app.use("/brands",verifyToken,verifyAdmin,brandRoutes)
 app.use("/customer",verifyToken,customerRoutes)

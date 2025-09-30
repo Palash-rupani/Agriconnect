@@ -11,55 +11,72 @@ import { ProductList } from './components/product-list/product-list';
 import { ProductDetails } from './components/product-details/product-details';
 import { Register } from './components/register/register';
 import { Login } from './components/login/login';
+import { authgaurd } from './core/auth-guard';
+import { AdminDashboard } from './components/manage/admin-dashboard/admin-dashboard';
+import { Adminguard } from './core/admin-guard';
+import { Profile } from './components/profile/profile';
+
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    canActivate : [authgaurd]
   },
   {
     path: 'admin/categories',
-    component: Categories
+    component: Categories,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/categories/add',
-    component: CategoriesForm
+    component: CategoriesForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/categories/edit/:id',
-    component: CategoriesForm
+    component: CategoriesForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/brands',
-    component: Brands
+    component: Brands,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/brands/add',
-    component: BrandsForm
+    component: BrandsForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/brands/edit/:id',
-    component: BrandsForm
+    component: BrandsForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/products',
-    component: ProductsComponent   // ✅ FIXED
+    component: ProductsComponent,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/products/add',
-    component: ProductsForm
+    component: ProductsForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'admin/products/edit/:id',
-    component: ProductsForm
+    component: ProductsForm,
+    canActivate : [Adminguard]
   },
   {
     path: 'products',
-    component: ProductList
+    component: ProductList,
+    canActivate : [authgaurd]
   },
   {
     path: 'products/:id',
-    component: ProductDetails
+    component: ProductDetails,
+    canActivate : [authgaurd]
   },
   {
     path: 'register',
@@ -68,5 +85,14 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Login
+  },
+  {
+    path: 'admin',
+    component: AdminDashboard,
+  },
+  {
+    path: 'profile',
+    component: Profile,
+    canActivate : [authgaurd]
   }
 ];

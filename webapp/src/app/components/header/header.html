@@ -2,7 +2,7 @@
   <!-- Top bar -->
   <div class="agc-topbar">
     <!-- Brand -->
-    <a class="agc-brand" href="#">
+    <a class="agc-brand" routerLink="/">
       <span class="agc-brand-badge" aria-hidden="true">🌿</span>
       <span>AgriConnect</span>
     </a>
@@ -10,7 +10,14 @@
     <!-- Navigation -->
     <nav class="agc-nav" aria-label="Primary">
       <a class="agc-link agc-link--active" routerLink="/">Home</a>
-      <a class="agc-link" routerLink="/profile">My Profile</a>
+
+      <!-- Show only for admins -->
+      <a
+        class="agc-link"
+        *ngIf="authservice.isloggedin() && authservice.isAdmin()"
+        routerLink="/admin">
+        Admin Dashboard
+      </a>
     </nav>
 
     <!-- Search -->
@@ -27,10 +34,24 @@
         Search
       </button>
     </div>
+
+    <!-- User Actions -->
+    <div class="agc-user-actions" *ngIf="authservice.isloggedin(); else loginBlock">
+      <a class="agc-link" routerLink="/profile">{{ authservice.getname() }}</a>
+      <button class="agc-logout" (click)="onLogout()">Logout</button>
+    </div>
+
+    <!-- Login fallback -->
+    <ng-template #loginBlock>
+      <div class="agc-user-actions">
+        <a class="agc-link" routerLink="/login">Login</a>
+        <a class="agc-link" routerLink="/register">Register</a>
+      </div>
+    </ng-template>
   </div>
 
-  <!-- Categories -->
-  <div class="agc-categories">
+  <!-- Categories (only visible if logged in) -->
+  <div class="agc-categories" *ngIf="authservice.isloggedin()">
     <nav class="agc-categories-inner" aria-label="Categories">
       <a
         *ngFor="let category of categorylist"

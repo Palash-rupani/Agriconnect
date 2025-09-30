@@ -34,6 +34,8 @@ export class Brands implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+    console.log('Stored Token in Brands Component:', token);
     this.dataSource.filterPredicate = (row: Brand, filter: string) => {
       const f = filter.trim().toLowerCase();
       return (row.name?.toLowerCase().includes(f) ?? false) ||

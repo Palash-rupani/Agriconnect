@@ -22,6 +22,37 @@ login( email:string,password:string){
   });
 }
 
-
-
+ getname(){
+  let userdata=localStorage.getItem('user');
+  if(userdata){
+    let user=JSON.parse(userdata);
+    return user.name;
+  }
+  return null;
+ }
+ isloggedin(){
+  let token=localStorage.getItem('token');
+  return token!=null;
+ }
+ logout(){
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  localStorage.removeItem('isFarmer');
+ }
+ isAdmin(){
+  let userdata=localStorage.getItem('user');
+  if(userdata){
+    let user=JSON.parse(userdata);
+    return user.isAdmin;
+  }
+  return false;
+ }
+ getmail(){
+  let userdata=localStorage.getItem('user');
+  if(userdata){
+    let user=JSON.parse(userdata);
+    return user.email;
+  }
+  return null;
+ }
 }

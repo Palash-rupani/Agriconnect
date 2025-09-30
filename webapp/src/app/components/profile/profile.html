@@ -1,0 +1,15 @@
+<div class="profile-container">
+  <h2>Profile</h2>
+  <p class="subtitle">Your basic account details</p>
+
+  <div class="profile-card">
+    <div class="avatar">
+      <span class="material-icons">account_circle</span>
+    </div>
+    <div class="user-details">
+      <span class="label">Account</span>
+      <h3 class="name">{{ authservice.getname() }}</h3>
+      <p class="email">{{ authservice.getmail() }}</p>
+    </div>
+  </div>
+</div>
