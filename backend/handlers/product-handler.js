@@ -37,6 +37,41 @@ async function getfeaturedproducts() {
     return products.map(x => x.toObject());
 }
 
+async function getProductsByListing(searchterm, categoryID, page, pagesize, sortby, sortorder,brandID) {
+    if (!sortby) {
+        sortby = 'price';
+    }
+    if (!sortorder) {
+        sortorder = -1;
+    }
+
+    let filter = {};
+
+if (searchterm) {
+    filter.$or = [
+        { name: { $regex: "\\b" + searchterm + "\\b", $options: "i" } },
+        { description: { $regex: ".*" + searchterm + ".*", $options: "i" } }
+    ];
+}
+
+
+    if (categoryID) {
+        filter.categoryID = categoryID;
+    }
+
+    if (brandID) {
+        filter.brandID = brandID;
+    }
+
+    const products = await product.find(filter)
+        .sort({ [sortby]: sortorder })  // dynamic sort field
+        .skip((page - 1) * pagesize)
+        .limit(pagesize);
+
+    return products.map(x => x.toObject());
+}
+
+
 
 module.exports = { 
     addProduct, 
@@ -46,4 +81,5 @@ module.exports = {
     getproductByID, 
     getnewproducts, 
     getfeaturedproducts 
+    ,getProductsByListing
 };

@@ -8,7 +8,8 @@ const {
   getallproducts,
   getproductByID,
   getnewproducts,
-  getfeaturedproducts
+  getfeaturedproducts,
+  getProductsByListing
 } = require('../handlers/product-handler');
 
 // New products
@@ -37,6 +38,12 @@ router.get('/featured', async (req, res) => {
 router.get("/categories", async (req, res) => {
     let categories = await getCategory();
     res.send(categories);
+})
+
+router.get("/products", async (req, res) => {
+    const {searchterm ,categoryID,sortby,sortorder,brandID}=req.query;
+    let prodcuts = await getProductsByListing(searchterm ,categoryID,sortby,sortorder,brandID);
+    res.send(prodcuts);
 })
 
 module.exports = router;

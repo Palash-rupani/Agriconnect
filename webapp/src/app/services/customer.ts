@@ -20,4 +20,11 @@ export class Customer {
   getcategories() {
     return this.http.get<Product[]>(environment.apiUrl+'/customer/categories');
   }
+  getproducts(searchQuery:{searchterm:string,categoryID:string,sortby:string,sortOrder:number,brandID:String}){
+    return this.http.post<Product[]>(
+  `${environment.apiUrl}/customer/products?searchTerm=${searchQuery.searchterm}&categoryID=${searchQuery.categoryID}&sortby=${searchQuery.sortby}&sortOrder=${searchQuery.sortOrder}&brandID=${searchQuery.brandID}`,
+  {}
+);
+
+  }
 }
