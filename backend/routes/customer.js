@@ -40,10 +40,25 @@ router.get("/categories", async (req, res) => {
     res.send(categories);
 })
 
-router.get("/products", async (req, res) => {
-    const {searchterm ,categoryID,sortby,sortorder,brandID}=req.query;
-    let prodcuts = await getProductsByListing(searchterm ,categoryID,sortby,sortorder,brandID);
-    res.send(prodcuts);
-})
+router.get('/products', async (req, res) => {
+  let { searchterm, categoryID, sortby, sortorder, brandID } = req.query;
+
+  // sanitize invalid values
+  if (categoryID === 'undefined') categoryID = undefined;
+  if (brandID === 'undefined') brandID = undefined;
+  if (sortby === 'undefined') sortby = undefined;
+
+  sortorder = sortorder ? parseInt(sortorder) : -1;
+
+  try {
+    const products = await getProductsByListing(searchterm, categoryID, sortby, sortorder, brandID);
+    res.send(products);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
+
+
 
 module.exports = router;

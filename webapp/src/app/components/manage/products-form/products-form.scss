@@ -1,4 +1,4 @@
-// Palette (exactly 5 colors)
+// Palette
 $primary: #2563eb;
 $bg: #ffffff;
 $border: #e5e7eb;
@@ -10,7 +10,7 @@ $muted: #6b7280;
   color: $text;
 }
 
-/* Card container */
+/* Container */
 .form-container {
   max-width: 1000px;
   margin: 24px auto;
@@ -48,7 +48,6 @@ $muted: #6b7280;
     font-weight: 700;
     font-size: 22px;
     line-height: 1.2;
-    letter-spacing: -0.01em;
   }
 
   .title-sub {
@@ -57,14 +56,14 @@ $muted: #6b7280;
   }
 }
 
-/* Base grid of the form */
+/* Base grid */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 18px;
 }
 
-/* Section blocks */
+/* Section */
 .section {
   display: block;
 
@@ -82,6 +81,8 @@ $muted: #6b7280;
     border: 1px solid $border;
     border-radius: 12px;
     padding: 14px;
+    position: relative;
+    z-index: 0; // prevents dropdown clipping
   }
 }
 
@@ -92,7 +93,7 @@ $muted: #6b7280;
   margin: -4px 0 4px;
 }
 
-/* Grid helpers inside sections */
+/* Grid helpers */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr;
@@ -107,7 +108,7 @@ $muted: #6b7280;
   grid-column: 1 / -1;
 }
 
-/* Flags row */
+/* Flags */
 .flags {
   display: flex;
   flex-wrap: wrap;
@@ -129,11 +130,12 @@ $muted: #6b7280;
 
     mat-checkbox {
       color: $text;
+      margin: 0;
     }
   }
 }
 
-/* Actions row */
+/* Actions */
 .form-actions {
   display: flex;
   gap: 12px;
@@ -155,60 +157,59 @@ $muted: #6b7280;
   }
 }
 
-/* Make fields fill their grid cells */
-.mat-mdc-form-field {
-  width: 100%;
+/* Angular Material Tweaks */
+:host ::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    border-radius: 12px !important;
+    background: #fafafa;
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+
+    &:hover {
+      background: #f7f7f7;
+    }
+  }
+
+  .mdc-text-field--focused .mdc-notched-outline__leading,
+  .mdc-text-field--focused .mdc-notched-outline__trailing,
+  .mdc-text-field--focused .mdc-notched-outline__notch {
+    border-color: rgba(37, 99, 235, 0.6) !important;
+  }
+
+  mat-hint {
+    color: $muted;
+    font-size: 12px;
+  }
+
+  mat-error {
+    font-size: 12px;
+  }
+
+  .mat-mdc-form-field .mdc-floating-label {
+    color: $muted;
+  }
+
+  .mat-mdc-select-trigger {
+    min-height: 40px;
+  }
+
+  .mat-mdc-select-panel {
+    max-height: 300px !important;
+    overflow-y: auto;
+    background: #fff !important; // 🔹 ensures dropdown is not transparent
+  }
+
+  .mat-mdc-select-value {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 }
 
-/* Slightly taller textarea for better UX */
-textarea[matInput] {
-  min-height: 110px;
-}
-
-/* Subtle, safe Angular Material polish */
-:host ::ng-deep .mat-mdc-text-field-wrapper {
-  border-radius: 12px !important;
-  background: #fafafa;
-  transition: background-color 160ms ease, box-shadow 160ms ease;
-}
-
-:host ::ng-deep .mat-mdc-text-field-wrapper:hover {
-  background: #f7f7f7;
-}
-
-:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading,
-:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing,
-:host ::ng-deep .mdc-text-field--focused .mdc-notched-outline__notch {
-  border-color: rgba(37, 99, 235, 0.6) !important;
-}
-
-:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
-  padding: 0 8px;
-}
-
-:host ::ng-deep mat-hint {
-  color: $muted;
-  font-size: 12px;
-}
-
-:host ::ng-deep mat-error {
-  font-size: 12px;
-}
-
-/* Label tone */
-:host ::ng-deep .mat-mdc-form-field .mdc-floating-label {
-  color: $muted;
-}
-
-/* Select height parity */
-:host ::ng-deep .mat-mdc-select-trigger {
-  min-height: 40px;
-}
-
-/* Minor spacing normalize for top-level fields (if any placed directly) */
-.form-grid > .mat-mdc-form-field {
-  margin: 2px 0;
-}
+/* Image section */
 .image-row {
   display: flex;
   align-items: center;
@@ -216,25 +217,40 @@ textarea[matInput] {
   margin-bottom: 1rem;
 }
 
-.preview-container {
+.image-preview {
   width: 100px;
   height: 100px;
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+:host ::ng-deep .mat-mdc-select-panel {
+  background-color: #ffffff !important; /* solid white background */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* clean subtle shadow */
+  border-radius: 8px !important;
+  backdrop-filter: none !important; /* removes any blur/transparency */
+  opacity: 1 !important;
+}
+/* Prevent dropdown clipping and ensure it's visible above all content */
+.section-body {
+  position: static !important; /* instead of relative */
+  overflow: visible !important; /* allow dropdown to extend out */
+  z-index: auto !important;
 }
 
-.preview-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Make dropdown panel solid and appear above everything */
+:host ::ng-deep .mat-mdc-select-panel {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  z-index: 9999 !important; /* ensure it's always on top */
 }
-.product-card img {
-  width: 100%;
-  height: 200px;         /* fixed height for uniformity */
-  object-fit: cover;     /* crop nicely instead of squishing */
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-

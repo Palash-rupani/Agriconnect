@@ -1,0 +1,22 @@
+.product-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.filters select,
+.filters input {
+  transition: all 0.2s ease-in-out;
+}
+
+.filters button {
+  transition: all 0.2s ease-in-out;
+}
+
+.filters button:hover {
+  transform: translateY(-1px);
+}
+
+.products {
+  h2 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
