@@ -1,1 +1,82 @@
-<p>product-details works!</p>
+<div class="min-h-screen bg-gray-50 py-10 px-6">
+
+  @if (product) {
+    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- 🍎 Left: Image Slider -->
+      <div class="relative">
+        <img
+          [src]="product.images?.[currentImageIndex]"
+          alt="{{ product.name }}"
+          class="w-full h-96 object-cover rounded-xl border"
+        />
+
+        <!-- Slider controls -->
+        <button
+          class="absolute top-1/2 -left-4 bg-white border rounded-full p-2 shadow hover:bg-gray-100"
+          (click)="prevImage()"
+        >
+          ‹
+        </button>
+
+        <button
+          class="absolute top-1/2 -right-4 bg-white border rounded-full p-2 shadow hover:bg-gray-100"
+          (click)="nextImage()"
+        >
+          ›
+        </button>
+
+        <!-- Small thumbnails -->
+        <div class="flex gap-3 mt-4 justify-center">
+          @for (img of product.images; track $index) {
+            <img
+              [src]="img"
+              alt="Product image"
+              class="w-16 h-16 object-cover rounded-lg border cursor-pointer transition-all"
+              [class.border-blue-500]="$index === currentImageIndex"
+              (click)="currentImageIndex = $index"
+            />
+          }
+        </div>
+      </div>
+
+      <!-- 🌿 Right: Product Details -->
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+          {{ product.name }}
+        </h1>
+
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-green-700 text-2xl font-semibold">
+            ₹{{ (product.price || 0) - ((product.price || 0) * (product.discount || 0) / 100) }}
+          </span>
+          @if (product.discount) {
+            <span class="text-gray-400 line-through text-lg">₹{{ product.price }}</span>
+            <span class="text-green-600 text-sm font-medium">({{ product.discount }}% OFF)</span>
+          }
+        </div>
+
+        <p class="text-gray-600 mb-6">{{ product.description }}</p>
+
+        <div class="text-sm text-gray-500 space-y-1 mb-6">
+          <p><strong>Category ID:</strong> {{ product.categoryID }}</p>
+          <p><strong>Featured:</strong> {{ product.isfeatured ? 'Yes' : 'No' }}</p>
+          <p><strong>New:</strong> {{ product.isnew ? 'Yes' : 'No' }}</p>
+        </div>
+
+        <!-- 🛒 Dummy Add to Cart Button -->
+        <button
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  }
+
+  @else {
+    <div class="text-center text-gray-500 mt-20">
+      Loading product details...
+    </div>
+  }
+</div>

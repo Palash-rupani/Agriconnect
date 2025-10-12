@@ -60,5 +60,22 @@ router.get('/products', async (req, res) => {
 });
 
 
+router.get('/product/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await getproductByID(id);
+
+    if (!product) {
+      return res.status(404).send({ message: 'Product not found' });
+    }
+
+    res.send(product);
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).send({ message: 'Server error' });
+  }
+});
+
+
 
 module.exports = router;

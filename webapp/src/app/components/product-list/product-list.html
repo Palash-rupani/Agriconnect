@@ -93,26 +93,5 @@
         <p>No products found. Try adjusting your filters.</p>
       </div>
     </ng-template>
-
-    <!-- 🔘 Pagination Buttons -->
-    <div class="flex justify-center items-center gap-4 mt-6" *ngIf="totalProducts > pagesize">
-      <button
-        (click)="prevPage()"
-        [disabled]="page === 1"
-        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-4 py-2 rounded-lg transition-all disabled:opacity-50"
-      >
-        ⬅ Previous
-      </button>
-
-      <span class="text-gray-600">Page {{ page }} of {{ totalPages }}</span>
-
-      <button
-        (click)="nextPage()"
-        [disabled]="page === totalPages"
-        class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition-all disabled:opacity-50"
-      >
-        Next ➡
-      </button>
-    </div>
   </section>
 </div>
