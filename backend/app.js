@@ -25,7 +25,7 @@ app.use("/customer",verifyToken,customerRoutes)
 
 
 async function connectDB() {
-  await mongoose.connect('mongodb://localhost:27017/Agriconnect_main',); {
+  await mongoose.connect('mongodb+srv://23eg107b44_db_user:Test123%21@cluster.5ymbwnq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster',); {
   }
   console.log('Connected to MongoDB')}
 connectDB().catch(err => {
