@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { category } from '../types/category'; // ✅ correct type
+import { category } from '../types/category';
+import { environment } from '../../environments/environment'; // ✅ import environment
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +10,28 @@ import { category } from '../types/category'; // ✅ correct type
 export class CategoryService {
   private http = inject(HttpClient);
 
+  // Get all categories
   getCategories(): Observable<category[]> {
-    return this.http.get<category[]>('http://localhost:3000/category');
+    return this.http.get<category[]>(`${environment.apiUrl}/category`);
   }
 
+  // Get category by ID
   getCategoriesById(id: string): Observable<category> {
-    return this.http.get<category>('http://localhost:3000/category/' + id);
+    return this.http.get<category>(`${environment.apiUrl}/category/${id}`);
   }
 
+  // Add new category
   addCategory(name: string): Observable<any> {
-    return this.http.post('http://localhost:3000/category', { name: name });
+    return this.http.post(`${environment.apiUrl}/category`, { name });
   }
 
+  // Update category
   updateCategory(id: string, model: { name: string }): Observable<any> {
-    return this.http.put('http://localhost:3000/category/' + id, model);
+    return this.http.put(`${environment.apiUrl}/category/${id}`, model);
   }
 
+  // Delete category
   deleteCategoryByID(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/category/' + id);
+    return this.http.delete(`${environment.apiUrl}/category/${id}`);
   }
 }

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'   // 👈 correct base URL
+  apiUrl: 'https://agriconnect-exqb.onrender.com'   // 👈 correct base URL
 };
