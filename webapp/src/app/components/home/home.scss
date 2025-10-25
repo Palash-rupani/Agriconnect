@@ -1,4 +1,4 @@
-$color-primary: #2e7d32;
+$color-primary: #1ce426;
 $color-accent: #d97706;
 $color-bg: #ffffff;
 $color-text: #111111;
@@ -21,6 +21,7 @@ $container: 72rem;
   max-width: $container;
   margin-inline: auto;
   padding-inline: $space-4;
+  background-color: #1ce426;
 }
 
 /* Hero */
